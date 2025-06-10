@@ -1,28 +1,15 @@
- //Note: The returned array must be malloced, assume caller calls free().
+//import java.util.HashMap;
 
-int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
-    int* resarr=(int *)malloc(2*sizeof(int));
-    if(resarr==NULL)
-    {
-        *returnSize=0;
-    }
-    for(int i=0;i<numsSize;i++)
-    {
-        for(int j=i+1;j<numsSize;j++)
-        {
-            if(nums[i]+nums[j]==target)
-            {
-                resarr[0]=i;
-                resarr[1]=j;
-                *returnSize=2;
-                return resarr;
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (map.containsKey(complement)) {
+                return new int[] { map.get(complement), i };
             }
+            map.put(nums[i], i);
         }
+        return new int[] {};
     }
-    *returnSize=0; //No solution
-    return NULL; 
 }
-
-
-//2nd solution
-
